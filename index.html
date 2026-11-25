@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!-- StoragePro - index.html
+     Sign-in page for staff and customers, with "Forgot password" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · StoragePro</title>
+  <!-- Fonts (Google Fonts) and icons (Font Awesome) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <!-- All the site's styles, and the tab icon -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/logo.svg">
+</head>
+<body>
+<div class="login">
+  <!-- Left panel: logo and welcome text -->
+  <section class="login-brand">
+    <a class="brand" href="index.html">
+      <img src="images/logo.svg" alt="">
+      <span class="brand-name">Storage<span>Pro</span></span>
+    </a>
+    <div>
+      <h1>Every locker and every balance in one place.</h1>
+      <p>Rentals, payments and the locker map for the front desk.</p>
+    </div>
+    <!-- Padlock picture (drawn right here as SVG; sized in "login-art" in styles.css) -->
+    <div class="login-art" aria-hidden="true">
+      <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <path d="M52 112V72a48 48 0 0 1 96 0v40" fill="none" stroke="#c3cad6" stroke-width="22"/>
+        <rect x="20" y="104" width="160" height="128" rx="6" fill="#e5892a"/>
+        <path d="M20 126h160M20 210h160" stroke="#b8640f" stroke-width="3"/>
+        <circle cx="100" cy="158" r="17" fill="#13213a"/>
+        <path d="M91 164h18l4 30H87z" fill="#13213a"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Sign-in form (js/login.js) -->
+  <section class="login-form-wrap">
+    <form class="card login-card" id="login-form">
+      <div>
+        <h2>Sign in</h2>
+      </div>
+
+      <!-- Error and success messages -->
+      <div class="alert s-od" id="login-error" hidden><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+      <div class="alert s-av" id="login-message" role="status" hidden><i class="fa-solid fa-circle-check"></i><span></span></div>
+
+      <div class="field">
+        <label for="username">Username, email or phone</label>
+        <input class="input" id="username" name="username" type="text" autocomplete="username" required autofocus
+               placeholder="e.g. jordan.lee or you@example.com">      </div>
+      <div class="field">
+        <div class="label-row">
+          <label for="password">Password</label>
+          <!-- Opens the reset password form -->
+          <button class="link-btn" type="button" id="forgot-link">Forgot password?</button>
+        </div>
+        <!-- Show / hide password button -->
+        <div class="input-reveal">
+          <input class="input" id="password" name="password" type="password" autocomplete="current-password" required>
+          <button class="reveal-btn" type="button" id="show-password" aria-label="Show password" aria-pressed="false" title="Show password">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in <i class="fa-solid fa-arrow-right"></i></button>    </form>
+
+    <!-- Reset password, step 1: confirm the account -->
+    <form class="card login-card" id="forgot-form" novalidate hidden>
+      <div>
+        <h2>Reset your password</h2>
+        <p class="muted login-sub">Type the details on your account. We'll show you a new temporary password right here.</p>
+      </div>
+
+      <div class="alert s-od" id="forgot-error" role="alert" hidden><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+
+      <div class="field">
+        <label for="forgot-login">Username, email or phone</label>
+        <input class="input" id="forgot-login" name="login" type="text" autocomplete="username"
+               placeholder="e.g. jordan.lee or you@example.com">
+      </div>
+      <div class="field">
+        <label for="forgot-name">Your full name</label>
+        <input class="input" id="forgot-name" name="fullName" type="text" autocomplete="name"
+               placeholder="As it is on your account, e.g. Jordan Lee">
+      </div>
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Get a new password <i class="fa-solid fa-key"></i></button>
+      <button class="btn btn-ghost btn-block back-to-signin" type="button"><i class="fa-solid fa-arrow-left"></i> Back to sign in</button>
+    </form>
+
+    <!-- Reset password, step 2: show the new password -->
+    <section class="card login-card" id="forgot-done" aria-labelledby="forgot-done-title" hidden>
+      <div>
+        <h2 id="forgot-done-title" tabindex="-1">Here's your new password</h2>
+        <p class="muted login-sub">Write it down or copy it before you go back. Your old password no longer works.</p>
+      </div>
+
+      <div class="new-password">
+        <span class="help">Account</span>
+        <strong id="forgot-account"></strong>
+        <span class="help">Temporary password</span>
+        <strong class="slip-password mono" id="forgot-password"></strong>
+        <button class="btn btn-secondary" type="button" id="copy-password"><i class="fa-regular fa-copy"></i> Copy password</button>
+      </div>
+
+      <p class="help" id="forgot-next"></p>
+
+      <label class="check">
+        <input type="checkbox" id="forgot-saved">
+        <span><strong>I've written down my new password</strong></span>
+      </label>
+      <button class="btn btn-primary btn-lg btn-block" type="button" id="forgot-return" disabled>
+        Return to sign in <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </section>
+  </section>
+</div>
+<!-- Scripts, in this order:
+     supabase-config.js   the database's address and key
+     store.js             all the data and the rules for changing it (reads the database as the page opens)
+     layout.js            messages and shared helpers
+     login.js             runs the sign-in and forgot-password forms
+     app.js               dark mode, sidebar collapse, print button and keyboard shortcuts -->
+<script src="js/supabase-config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/login.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

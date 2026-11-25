@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- StoragePro - customer.html
+     The customer's own website: Home, Pay, Repairs, Help and Account -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Storage · StoragePro</title>
+  <!-- Fonts (Google Fonts) and icons (Font Awesome) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <!-- All the site's styles, and the tab icon -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/logo.svg">
+</head>
+<body class="site-body">
+<!-- Top menu: each link opens one section (Home, Pay, Repairs, Help, Account) -->
+<header class="site-top">
+  <div class="site-top-inner">
+    <a class="brand site-brand" href="#home">
+      <img src="images/logo.svg" alt="">
+      <span class="brand-name">Storage<span>Pro</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Customer menu">
+      <a href="#home" data-tab="home"><i class="fa-solid fa-warehouse"></i><span>Home</span></a>
+      <a href="#pay" data-tab="pay"><i class="fa-solid fa-circle-dollar-to-slot"></i><span>Pay</span></a>
+      <a href="#repairs" data-tab="repairs"><i class="fa-solid fa-screwdriver-wrench"></i><span>Repairs</span></a>
+      <a href="#help" data-tab="help"><i class="fa-solid fa-circle-question"></i><span>Help</span></a>
+      <a href="#account" data-tab="account"><i class="fa-solid fa-user"></i><span>Account</span></a>
+    </nav>
+    <div class="site-user">
+      <button class="icon-btn" type="button" data-action="dark" title="Dark mode"><i class="fa-solid fa-moon when-light"></i><i class="fa-solid fa-sun when-dark"></i></button>
+      <span class="avatar" id="site-avatar"></span>
+      <span class="site-user-name" id="site-name"></span>
+      <button class="btn btn-secondary btn-sm" type="button" id="site-sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button>
+    </div>
+  </div>
+</header>
+
+<!-- Page content (drawn by js/customer.js) -->
+<main class="site-main" id="portal" tabindex="-1"></main>
+
+<!-- Footer: office hours and contact details (filled in by js/customer.js) -->
+<footer class="site-foot" id="site-foot"></footer>
+
+<!-- Scripts, in this order:
+     supabase-config.js   the database's address and key
+     store.js             all the data and the rules for changing it (reads the database as the page opens)
+     layout.js            messages and shared helpers
+     customer.js          draws each section
+     app.js               dark mode, sidebar collapse, print button and keyboard shortcuts -->
+<script src="js/supabase-config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/customer.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
